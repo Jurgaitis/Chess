@@ -23,7 +23,11 @@ var pieces = GetInputData(inputFilePath);
 
 foreach (var piece in pieces)
 {
-    board.PlacePiece(piece);
+    try
+    {
+        board.PlacePiece(piece);
+    }
+    catch { }
 }
 
 DrawBoard();
@@ -44,27 +48,32 @@ List<Piece> GetInputData(string filePath)
     while (!reader.EndOfStream)
     {
         var data = reader.ReadLine().Split(' ');
-        Coords position = new(Int32.Parse(data[1]), Int32.Parse(data[2]));
-        switch (data[0]) {
-            case "king":
-                pieces.Add(new King(position, board));
-                break;
-            case "queen":
-                pieces.Add(new Queen(position, board));
-                break;
-            case "rook":
-                pieces.Add(new Rook(position, board));
-                break;
-            case "bishop":
-                pieces.Add(new Bishop(position, board));
-                break;
-            case "knight":
-                pieces.Add(new Knight(position, board));
-                break;
-            case "shadow":
-                pieces.Add(new Shadow(position, board));
-                break;
+        try
+        {
+            Coords position = new(Int32.Parse(data[1]), Int32.Parse(data[2]));
+            switch (data[0])
+            {
+                case "king":
+                    pieces.Add(new King(position, board));
+                    break;
+                case "queen":
+                    pieces.Add(new Queen(position, board));
+                    break;
+                case "rook":
+                    pieces.Add(new Rook(position, board));
+                    break;
+                case "bishop":
+                    pieces.Add(new Bishop(position, board));
+                    break;
+                case "knight":
+                    pieces.Add(new Knight(position, board));
+                    break;
+                case "shadow":
+                    pieces.Add(new Shadow(position, board));
+                    break;
+            }
         }
+        catch {}
     }
     return pieces;
 }

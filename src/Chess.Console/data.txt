@@ -1,4 +1,8 @@
 ﻿king 0 0
+king 0 0
+king -1 0
+king 0 10
+king 0
 queen 5 1
 rook 1 3
 bishop 3 7
